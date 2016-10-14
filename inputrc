@@ -1,0 +1,4 @@
+$include /etc/inputrc
+
+# 对于目录的链接，tab会自动补全'/'
+set mark-symlinked-directories on
