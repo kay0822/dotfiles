@@ -263,6 +263,12 @@ nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
 nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 
 
+
+"""
+""" vim-go
+"""
+Plugin 'fatih/vim-go'
+
 """   _____   _   _   ____  
 """  | ____| | \ | | |  _ \ 
 """  |  _|   |  \| | | | | |
@@ -287,7 +293,7 @@ filetype plugin indent on    " required
 
 """"""" common """"""
 set ignorecase
-set tabstop=4
+"set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set noexpandtab
