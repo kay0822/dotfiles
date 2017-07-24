@@ -1,1 +1,414 @@
-vimrc1
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+"""   ____    _____    ____   ___   _   _ 
+"""  | __ )  | ____|  / ___| |_ _| | \ | |
+"""  |  _ \  |  _|   | |  _   | |  |  \| |
+"""  | |_) | | |___  | |_| |  | |  | |\  |
+"""  |____/  |_____|  \____| |___| |_| \_|
+"""                                       
+
+
+"""
+""" nerdtree 
+"""	http://vimawesome.com/plugin/nerdtree-red
+"""	:help NERDTree
+"""
+Plugin 'scrooloose/nerdtree'
+let g:NERDTreeMouseMode=3   " 鼠标单击打开文件/目录
+let g:NERDTreeWinPos = "right"
+
+" 默认打开nerdtree
+autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd w  " 打开后立即切换到中间窗口
+
+" 如果打开的是目录，默认打开nerdtree
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+
+" 如果没有任何输入文件时，默认打开nerdtree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" 如果只有一个nerdtree窗口还开着，自动关闭
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" 快捷键ctrl+n
+nmap <C-n> :NERDTreeToggle<CR>
+
+
+
+"""
+""" nerd-commenter
+"""	http://vimawesome.com/plugin/the-nerd-commenter
+"""	:help nerdcommenter
+"""
+Plugin 'scrooloose/nerdcommenter'
+map <C-\> <plug>NERDCommenterToggle<CR>	    " 快捷键
+nmap <Leader>cc <Plug>NERDCommenterComment
+xmap <Leader>cc <Plug>NERDCommenterComment
+nmap <Leader>c<Space> <Plug>NERDCommenterToggle
+xmap <Leader>C<Space> <Plug>NERDCommenterToggle
+nmap <Leader>cm <Plug>NERDCommenterMinimal
+xmap <Leader>cm <Plug>NERDCommenterMinimal
+nmap <Leader>cs <Plug>NERDCommenterSexy
+xmap <Leader>cs <Plug>NERDCommenterSexy
+nmap <Leader>ci <Plug>NERDCommenterInvert
+xmap <Leader>ci <Plug>NERDCommenterInvert
+nmap <Leader>cy <Plug>NERDCommenterYank
+xmap <Leader>cy <Plug>NERDCommenterYank
+nmap <Leader>cl <Plug>NERDCommenterAlignLeft
+xmap <Leader>cl <Plug>NERDCommenterAlignLeft
+nmap <Leader>cb <Plug>NERDCommenterAlignBoth
+xmap <Leader>cb <Plug>NERDCommenterAlignBoth
+nmap <Leader>cn <Plug>NERDCommenterNest
+xmap <Leader>cn <Plug>NERDCommenterNest
+nmap <Leader>cu <Plug>NERDCommenterUncomment
+xmap <Leader>cu <Plug>NERDCommenterUncomment
+nmap <Leader>c$ <Plug>NERDCommenterToEOL
+xmap <Leader>c$ <Plug>NERDCommenterToEOL
+nmap <Leader>cA <Plug>NERDCommenterAppend
+xmap <Leader>cA <Plug>NERDCommenterAppend
+nmap <Leader>ca <Plug>NERDCommenterAltDelims	" 切换 '//'与'/** */'
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Align line-wise comment delimiters flush left instead of following code
+" indentation
+let g:NERDDefaultAlign = 'left'
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' }, 'go': {'left': '//', 'leftAlt': '/**', 'rightAlt': '*/'} }
+" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 0  " 对空行加注释
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+
+"""
+""" vim-airline (貌似还有问题，不知道怎么用)
+"""	http://vimawesome.com/plugin/vim-airline
+"""
+Plugin 'bling/vim-airline'
+" Automatically displays all buffers when there's only one tab open.
+"这个是安装字体后 必须设置此项" 
+let g:airline_powerline_fonts = 1   
+let g:airline#extensions#tabline#enabled = 1
+" Show buffer number
+let g:airline#extensions#tabline#buffer_nr_show = 1 
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+nnoremap <leader>p :bprevious<CR>
+nnoremap <leader>n :bnext<CR>
+nnoremap <leader>1 :b 1<CR>
+nnoremap <leader>2 :b 2<CR>
+nnoremap <leader>3 :b 3<CR>
+nnoremap <leader>4 :b 4<CR>
+nnoremap <leader>5 :b 5<CR>
+nnoremap <leader>6 :b 6<CR>
+nnoremap <leader>7 :b 7<CR>
+nnoremap <leader>8 :b 8<CR>
+nnoremap <leader>9 :b 9<CR>
+
+Plugin 'vim-airline/vim-airline-themes'
+" let g:airline_theme='onedark'
+
+
+
+"""
+""" vim-colorschemes
+"""	http://vimawesome.com/plugin/vim-colorschemes-sweeter-than-fiction
+"""	:help colorscheme
+"""	more colors: http://vimcolors.com/
+"""
+Plugin 'flazz/vim-colorschemes'
+Plugin 'agude/vim-eldar'
+
+
+
+"""
+""" bclose		
+"""	http://vimawesome.com/plugin/bclose-vim-state-of-grace
+""" 
+" Plugin 'rbgrouleff/bclose.vim'
+" nnoremap <leader>bc :Bclose<CR>
+
+
+"""
+""" youcompleteme  
+"""
+" Plugin 'valloric/youcompleteme'
+"
+" # cd ~/.vim/bundle/youcompleteme
+" # ./install.py --clang-completer
+" # * 针对不同项目，在项目目录下放一个.ycm_extra_conf.py
+" # ln -fs
+" ~/.vim/bundle/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py
+" <proj>/.ycm_extra_conf.py
+"
+"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+"let g:ycm_error_symbol = '>>'
+"let g:ycm_warning_symbol = '>*'
+"nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+"nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+"nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+""nmap <F4> :YcmDiags<CR>
+"
+"" # 关联ctags的文件
+"let g:ycm_collect_identifiers_from_tag_files = 1  
+"
+"" # 默认情况下，加载目录下的.ycm_extra_conf.py文件需要确认，取消这个确认操作
+"let g:ycm_confirm_extra_conf = 0
+"
+"" # youcompleteme 与 syntastic冲突，如果要启用syntastic，将diagnostics_ui关闭
+""let g:ycm_show_diagnostics_ui = 0
+"
+"" # 总是显示错误或引用的位置列表
+"let g:ycm_always_populate_location_list = 1
+
+
+"""
+""" syntastic (语法检测)
+"""	http://vimawesome.com/plugin/syntastic
+"""	:help syntastic
+"""
+"
+" 可以通过:SyntasticInfo <filetype>查看状态
+" <proj>/.syntastic_clang_check_config 和 <proj>/.syntastic_cppcheck_config
+" 用于扩展cflags
+"
+Plugin 'scrooloose/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+"let g:syntastic_cpp_remove_include_errors = 1
+"let g:syntastic_c_remove_include_errors = 1
+"let g:syntastic_cpp_check_header = 1
+"let g:syntastic_c_check_header = 1
+"let g:syntastic_cpp_checkers = ['cppcheck']
+"let g:syntastic_c_checkers = ['clang_check']
+let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
+
+
+
+"""
+""" ctrlp (文件，buffer搜索)
+"""	https://github.com/ctrlpvim/ctrlp.vim
+"""
+Plugin 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_map = '<c-p>'		" 快捷键
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+" # 默认使用正则表达式搜索。<C-r>切换
+let g:ctrlp_regexp = 1
+" # 默认按文件名搜索。<C-d>切换
+let g:ctrlp_by_filename = 1
+
+
+"""
+""" vim-sensible (号称所有人都认可的默认配置)
+"""
+Plugin 'tpope/vim-sensible'
+
+
+
+"""
+""" vim-fugitive (git wrapper)
+""" 	http://vimawesome.com/plugin/fugitive-vim
+""" 
+"""
+" Plugin 'tpope/vim-fugitive'
+
+
+"""
+""" vim-surround (比较适合xml/html编辑)
+"""	http://vimawesome.com/plugin/surround-vim
+"""	:help surround
+" Plugin 'tpope/vim-surround'
+
+
+
+" Plugin 'tpope/vim-commentary'
+" Plugin 'ReplaceWithRegister'
+
+
+"""
+""" textobj 
+"""
+Plugin 'kana/vim-textobj-entire'  " ae: all entire, vae: select all entire
+Plugin 'kana/vim-textobj-user'
+Plugin 'kana/vim-textobj-line'
+
+
+
+"""
+""" tagbar  (symbol table)
+"""	http://vimawesome.com/plugin/tagbar
+"""	:help tagbar
+"""
+Plugin 'majutsushi/tagbar'
+autocmd VimEnter * TagbarToggle	" 默认打开
+nnoremap <F8> :TagbarToggle<CR>
+nnoremap <F9> :TagbarToggle<CR>
+
+let g:tagbar_singleclick = 1
+let g:tagbar_left = 1
+" let g:tagbar_width = 25
+let g:tagbar_show_linenumbers = 1
+
+
+
+"""
+""" vim-tags
+"""
+" Plugin 'szw/vim-tags'
+
+
+
+"""
+""" cscope
+"""
+" Plugin 'brookhong/cscope.vim'
+" nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
+" nnoremap <leader>l :call ToggleLocationList()<CR>
+" " s: Find this C symbol
+" nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
+" " g: Find this definition
+" nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
+" " d: Find functions called by this function
+" nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
+" " c: Find functions calling this function
+" nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
+" " t: Find this text string
+" nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
+" " e: Find this egrep pattern
+" nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
+" " f: Find this file
+" nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
+" " i: Find files #including this file
+" nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
+
+
+
+"""
+""" vim-go
+""" 	注意：第一次使用需要:GoInstallBinaries
+"""
+Plugin 'fatih/vim-go'
+" use goimports for formatting
+let g:go_fmt_command = "goimports"
+
+" turn highlighting on
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+au Filetype go nnoremap <leader>v :vsp <CR>:exe "GoDef" <CR>
+au Filetype go nnoremap <leader>s :sp <CR>:exe "GoDef"<CR>
+au Filetype go nnoremap <leader>t :tab split <CR>:exe "GoDef"<CR>
+
+
+
+"""
+""" vim-devicons (图标包)
+"""	http://vimawesome.com/plugin/vim-devicons
+"""
+"Plugin 'ryanoasis/vim-devicons'
+
+
+
+"""   _____   _   _   ____  
+"""  | ____| | \ | | |  _ \ 
+"""  |  _|   |  \| | | | | |
+"""  | |___  | |\  | | |_| |
+"""  |_____| |_| \_| |____/ 
+"""                         
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+"""    ____ ___  __  __ __  __  ___  _   _ 
+"""   / ___/ _ \|  \/  |  \/  |/ _ \| \ | |
+"""  | |  | | | | |\/| | |\/| | | | |  \| |
+"""  | |__| |_| | |  | | |  | | |_| | |\  |
+"""   \____\___/|_|  |_|_|  |_|\___/|_| \_|
+"""                                        
+" set ignorecase
+" set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set noexpandtab
+set number
+set relativenumber
+" set colorcolumn=100
+" highlight ColorColumn ctermbg=darkgray
+
+
+if has("gui_running")
+	" set guifont=Monospace\ 12
+	set guifont=Courier\ New\ 16
+endif
+
+" mouse click
+if has('mouse')
+   set mouse=a
+endif
+
+
+
+"""
+""" window command
+"""
+" ctrl + hjkl 切换窗口
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+nnoremap <F7> :call CscopeFindInteractive(expand('<cword>'))<CR>
+nnoremap <F4> n
+nnoremap <F3> N
+
+
+colorscheme onedark
+
+"""
+""" vim功能备忘录
+"""
+" Q: reload .vimrc
+" A: :so %   OR     :source %
+" Q: 代码黏贴
+" A: :set paste
